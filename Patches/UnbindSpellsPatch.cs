@@ -17,7 +17,7 @@ namespace UnboundedArcana.Patches
         {
             if (initialized) return;
             initialized = true;
-            Main.Logger.Log("Patching spells");
+            //Main.Logger.Log("Patching spells");
             SpellEdits.EditCauseFear();
         }
     }

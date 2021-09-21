@@ -11,7 +11,8 @@ namespace UnboundedArcana
 {
     public static class Main
     {
-        public static UnityModManager.ModEntry.ModLogger Logger { get; set; }
+        public static UnityModManager.ModEntry.ModLogger Logger { get; private set; }
+        public static bool enabled;
 
         public static bool Load(UnityModManager.ModEntry modEntry)
         {
@@ -21,5 +22,10 @@ namespace UnboundedArcana
             return true;
         }
 
+        public static bool OnToggle(UnityModManager.ModEntry modEntry, bool value)
+        {
+            enabled = value;
+            return true;
+        }
     }
 }
