@@ -1,0 +1,12 @@
+﻿{
+  "Id": "UnboundedArcana",
+  "AssemblyName": "UnboundedArcana.dll",
+  "EntryMethod": "UnboundedArcana.Main.Load",
+  "Author": "Hypebringer",
+  "DisplayName": "Unbounded Arcana",
+  "GameVersion": "1.0",
+  "HomePage": "https://github.com/Aegonek/UnboundedArcana",
+  "ManagerVersion": "0.23.0",
+  "Requirements": [],
+  "Version": "0.1.0"
+}
