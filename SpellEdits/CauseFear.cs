@@ -23,9 +23,9 @@ namespace UnboundedArcana
                 var causeFear = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(CreateBlueprintGuid(causeFearGuid));
                 causeFear.m_Description = CreateLocalizedString("The affected creature becomes frightened for 1d4 rounds. If the subject succeeds at a Will save, it is shaken for 1 round instead. Cause fear dispels remove fear.");
                 var onRun = causeFear.GetComponent<AbilityEffectRunAction>();
-                var scareTargetAction = onRun.Actions.Actions.FirstOfType<Conditional>().IfFalse.Actions.FirstOfType<Conditional>();
-                scareTargetAction.ConditionsChecker.Conditions = new Condition[] { };
-                Main.Logger.Log($"Successfully installed Cause Fear patch!");
+                var conditional = onRun.Actions.Actions.FirstOfType<Conditional>().IfFalse.Actions.FirstOfType<Conditional>();
+                conditional.ConditionsChecker.Conditions = new Condition[] { };
+                Main.Logger.Log($"Successfully installed Cause Fear edit!");
             }
             catch (Exception e)
             {

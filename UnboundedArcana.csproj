@@ -89,6 +89,7 @@
     <Compile Include="Patches\UnchainSpellsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellEdits\CauseFear.cs" />
+    <Compile Include="SpellEdits\Sleep.cs" />
     <Compile Include="SpellEdits\Scare.cs" />
     <Compile Include="Utilities\Blueprint.cs" />
     <Compile Include="Utilities\Tag.cs" />

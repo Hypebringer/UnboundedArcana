@@ -16,7 +16,7 @@ namespace UnboundedArcana
 {
     partial class SpellEdits
     {
-        public static void EditScare()
+        public static void EditRainbowPattern()
         {
             const string scareGuid = "08cb5f4c3b2695e44971bf5c45205df0";
 

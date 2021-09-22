@@ -19,6 +19,8 @@ namespace UnboundedArcana.Patches
             initialized = true;
             SpellEdits.EditCauseFear();
             SpellEdits.EditScare();
+            SpellEdits.EditSleep();
+            SpellEdits.EditDeepSlumber();
         }
     }
 }
