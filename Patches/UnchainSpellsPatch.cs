@@ -9,7 +9,7 @@ using Kingmaker.Blueprints.JsonSystem;
 namespace UnboundedArcana.Patches
 {
     [HarmonyPatch(typeof(BlueprintsCache), "Init")]
-    static class UnbindSpellsPatch
+    static class UnchainSpellsPatch
     {
         static bool initialized = false;
 
@@ -17,8 +17,8 @@ namespace UnboundedArcana.Patches
         {
             if (initialized) return;
             initialized = true;
-            //Main.Logger.Log("Patching spells");
             SpellEdits.EditCauseFear();
+            SpellEdits.EditScare();
         }
     }
 }

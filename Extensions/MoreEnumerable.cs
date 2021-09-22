@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace UnboundedArcana.Extensions
 {
-    static class LINQExtensions
+    static class MoreEnumerable
     {
+        public static IEnumerable<T> Singleton<T>(this T source) { yield return source; }
         public static T FirstOfType<T>(this IEnumerable source)
         {
             foreach (var item in source)
