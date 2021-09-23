@@ -10,6 +10,12 @@ namespace UnboundedArcana.Extensions
     static class MoreEnumerable
     {
         public static IEnumerable<T> Singleton<T>(this T source) { yield return source; }
+        public static IEnumerable<T> ConcatSingle<T>(this IEnumerable<T> source, T added)
+        {
+            foreach (T item in source)
+                yield return item;
+            yield return added; 
+        }
         public static T FirstOfType<T>(this IEnumerable source)
         {
             foreach (var item in source)
