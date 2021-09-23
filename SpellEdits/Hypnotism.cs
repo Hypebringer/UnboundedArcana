@@ -63,7 +63,7 @@ namespace UnboundedArcana
                 var onRun = hypnotism.GetComponent<AbilityEffectRunAction>();
                 var firstConditionChecker = onRun.Actions.Actions.FirstOfType<Conditional>().ConditionsChecker;
                 firstConditionChecker.Conditions = firstConditionChecker.Conditions
-                    .Where(x => x as ContextConditionHitDice == null)
+                    .Where(x => x.IsNotType<ContextConditionHitDice>())
                     .ToArray();
 
 
