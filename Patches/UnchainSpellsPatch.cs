@@ -22,6 +22,7 @@ namespace UnboundedArcana.Patches
             SpellEdits.EditSleep();
             SpellEdits.EditDeepSlumber();
             SpellEdits.EditRainbowPattern();
+            SpellEdits.EditHypnotism();
         }
     }
 }

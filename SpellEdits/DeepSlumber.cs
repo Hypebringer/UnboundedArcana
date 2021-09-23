@@ -29,10 +29,6 @@ namespace UnboundedArcana
                 var deepSlumber = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(deepSlumberGuid);
                 deepSlumber.m_Description = CreateLocalizedString("This spell functions like sleep, except that it affects 10 + caster level (max 10) HD of targets.");
 
-
-                var contextCalculateSharedValue = deepSlumber.GetComponent<ContextCalculateSharedValue>();
-                contextCalculateSharedValue.Value.DiceCountValue = null;
-
                 var hitDiceLimit = deepSlumber.GetComponent<ContextCalculateSharedValue>();
                 hitDiceLimit.Value.BonusValue = new ContextValue { ValueType = ContextValueType.Rank };
 
