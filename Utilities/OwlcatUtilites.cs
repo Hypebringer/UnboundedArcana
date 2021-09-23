@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Kingmaker.Blueprints;
 using Kingmaker.Localization;
+using Kingmaker.UnitLogic.Abilities.Blueprints;
+using UnboundedArcana.Extensions;
+using UnityEngine;
 
 namespace UnboundedArcana.Utilities
 {
-    static class Blueprint
+    static class OwlcatUtilites
     {
         public static BlueprintGuid CreateBlueprintGuid(string raw) => new BlueprintGuid(new Guid(raw));
         public static LocalizedString CreateLocalizedString(string raw)
         {
-            var taggedDescription = Tag.TagEncyclopediaEntries(raw);
+            var taggedDescription = TagUtilities.TagEncyclopediaEntries(raw);
             var localizedDescription = SaveLocalizedString(taggedDescription);
             return localizedDescription;
         }

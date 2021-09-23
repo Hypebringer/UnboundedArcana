@@ -13,7 +13,7 @@ using Kingmaker.UnitLogic.Mechanics.Actions;
 using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
-using static UnboundedArcana.Utilities.Blueprint;
+using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
 namespace UnboundedArcana
@@ -37,7 +37,7 @@ namespace UnboundedArcana
                 hitDiceConfig.m_Max = 10;
                 hitDiceConfig.m_Progression = ContextRankProgression.Div2PlusStep;
                 hitDiceConfig.m_StepLevel = 4;
-                hitDiceConfig.m_BaseValueType = ContextRankBaseValueType.MaxCasterLevel;
+                hitDiceConfig.m_BaseValueType = ContextRankBaseValueType.CasterLevel;
 
                 Main.Logger.Log($"Successfully installed Sleep edit!");
             }

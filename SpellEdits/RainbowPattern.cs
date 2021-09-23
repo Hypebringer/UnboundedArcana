@@ -9,7 +9,7 @@ using Kingmaker.UnitLogic.Abilities.Blueprints;
 using Kingmaker.UnitLogic.Abilities.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
-using static UnboundedArcana.Utilities.Blueprint;
+using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
 namespace UnboundedArcana

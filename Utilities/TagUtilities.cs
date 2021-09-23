@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace UnboundedArcana.Utilities
 {
     // copy pasted from TabletopTweaks
-    static class Tag
+    static class TagUtilities
     {
         private static readonly EncyclopediaEntry[] EncyclopediaEntries = new EncyclopediaEntry[] {
             new EncyclopediaEntry {
