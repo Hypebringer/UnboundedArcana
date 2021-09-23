@@ -9,7 +9,6 @@ namespace UnboundedArcana.Extensions
 {
     static class MoreEnumerable
     {
-        public static IEnumerable<T> Singleton<T>(this T source) { yield return source; }
         public static IEnumerable<T> ConcatSingle<T>(this IEnumerable<T> source, T added)
         {
             foreach (T item in source)
@@ -34,6 +33,33 @@ namespace UnboundedArcana.Extensions
                     return first;
             }
             return default(T);
+        }
+
+        public static IEnumerable<T> ReplaceFirst<T>(this IEnumerable<T> source, Func<T, bool> which, T replacement)
+        {
+            bool replaced = false;
+            foreach (var item in source)
+            {
+                if (!replaced && which(item))
+                {
+                    yield return replacement;
+                    replaced = true;
+                }
+                else
+                    yield return item;
+            }
+        }
+
+        public static IEnumerable<T> RemoveFirst<T>(this IEnumerable<T> source, Func<T, bool> which)
+        {
+            bool removed = false;
+            foreach (var item in source)
+            {
+                if (!removed && which(item))
+                    removed = true;
+                else
+                    yield return item;
+            }
         }
     }
 }
