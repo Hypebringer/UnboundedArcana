@@ -15,10 +15,17 @@ namespace UnboundedArcana.Extensions
                 .ConcatSingle(component)
                 .ToArray();
         }
-        public static void ReplaceFirstComponent(this BlueprintScriptableObject ability, Func<BlueprintComponent, bool> which, BlueprintComponent component)
+        public static void ReplaceComponent(this BlueprintScriptableObject ability, Func<BlueprintComponent, bool> which, BlueprintComponent component)
         {
             ability.Components = ability.Components
-                .ReplaceFirst(which, component)
+                .Replace(which, component)
+                .ToArray();
+        }
+
+        public static void RemoveComponent(this BlueprintScriptableObject ability, Func<BlueprintComponent, bool> which)
+        {
+            ability.Components = ability.Components
+                .Remove(which)
                 .ToArray();
         }
     }

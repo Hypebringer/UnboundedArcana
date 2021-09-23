@@ -64,7 +64,7 @@ namespace UnboundedArcana
                 // Remove hit dice initial condition
                 var initialCondChecker = onRun.Actions.Actions.FirstOfType<Conditional>().ConditionsChecker;
                 initialCondChecker.Conditions = initialCondChecker.Conditions
-                    .RemoveFirst(x => x is ContextConditionHitDice)
+                    .Remove(x => x is ContextConditionHitDice)
                     .ToArray();
 
                 // Different condition branches for undead and living
@@ -84,7 +84,7 @@ namespace UnboundedArcana
                 foreach (var actionList in new[] { undeadAction, aliveAction })
                 {
                     actionList.Actions = actionList.Actions
-                        .RemoveFirst(x => x is ContextActionChangeSharedValue)
+                        .Remove(x => x is ContextActionChangeSharedValue)
                         .ToArray();
 
                     var applyBuffAction = actionList.Actions.FirstOfType<ContextActionSavingThrow>()
@@ -111,7 +111,7 @@ namespace UnboundedArcana
                 };
 
                 hypnotismBuff.Components = hypnotismBuff.Components
-                    .RemoveFirst(x => x is AddCondition)
+                    .Remove(x => x is AddCondition)
                     .ConcatSingle(saveEachRoundCondition)
                     .ToArray();
 

@@ -26,6 +26,7 @@ namespace UnboundedArcana.Patches
             SpellEdits.EditRayOfFrost();
             SpellEdits.EditAcidSplash();
             SpellEdits.EditJolt();
+            SpellEdits.EditDaze();
         }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Patches\UnchainSpellsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpellEdits\Daze.cs" />
     <Compile Include="SpellEdits\Jolt.cs" />
     <Compile Include="SpellEdits\CauseFear.cs" />
     <Compile Include="SpellEdits\DeepSlumber.cs" />

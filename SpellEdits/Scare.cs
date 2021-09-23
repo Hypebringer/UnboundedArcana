@@ -28,7 +28,7 @@ namespace UnboundedArcana
                 var conditional = onRun.Actions.Actions.FirstOfType<Conditional>();
                 var oldConditions = conditional.ConditionsChecker.Conditions;
                 var newConditions = oldConditions
-                    .RemoveFirst(cond => cond is ContextConditionHitDice)
+                    .Remove(cond => cond is ContextConditionHitDice)
                     .ToArray(); // reversed conditon
                 conditional.ConditionsChecker.Conditions = newConditions;
                 Main.Logger.Log($"Successfully installed Scare edit!");

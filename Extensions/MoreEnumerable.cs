@@ -35,7 +35,10 @@ namespace UnboundedArcana.Extensions
             return default(T);
         }
 
-        public static IEnumerable<T> ReplaceFirst<T>(this IEnumerable<T> source, Func<T, bool> which, T replacement)
+        /// <summary>
+        /// Replaces first element that satisfied the predicate with replacement, returns new sequence.
+        /// </summary>
+        public static IEnumerable<T> Replace<T>(this IEnumerable<T> source, Func<T, bool> which, T replacement)
         {
             bool replaced = false;
             foreach (var item in source)
@@ -50,7 +53,10 @@ namespace UnboundedArcana.Extensions
             }
         }
 
-        public static IEnumerable<T> RemoveFirst<T>(this IEnumerable<T> source, Func<T, bool> which)
+        /// <summary>
+        /// Removes first element that satisfied the predicate, returns new sequence.
+        /// </summary>
+        public static IEnumerable<T> Remove<T>(this IEnumerable<T> source, Func<T, bool> which)
         {
             bool removed = false;
             foreach (var item in source)
