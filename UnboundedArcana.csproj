@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MoreEnumerable.cs" />
-    <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\UnchainSpellsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

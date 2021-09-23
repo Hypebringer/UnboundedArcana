@@ -20,7 +20,6 @@ using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
 using static UnboundedArcana.Utilities.Blueprint;
-using static UnboundedArcana.Extensions.ReflectionExtensions;
 
 
 namespace UnboundedArcana
@@ -37,71 +36,71 @@ namespace UnboundedArcana
                 var hypnotism = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(hypnotismGuid);
                 hypnotism.m_Description = CreateLocalizedString("Your gestures and droning incantation fascinate nearby living creatures, causing them to stop and stare blankly at you in a dazed condition. At the end of their turn, the subjects may attempt a new saving throw to end the effect.");
 
-                var contextCalculateSharedDuration = hypnotism
-                    .GetComponents<ContextCalculateSharedValue>()
-                    .First(x => x.ValueType == AbilitySharedValue.Duration);
-                var newCalculateSharedValue = new ContextDiceValue
+                // Remove SharedValues
+                var components = hypnotism.Components
+                    .Where(comp => !(comp is ContextCalculateSharedValue));
+
+                // Add SharedValue for duration
+                var newDurationValue = new ContextCalculateSharedValue
                 {
-                    BonusValue = new ContextValue { ValueType = ContextValueType.Rank }
+                    ValueType = AbilitySharedValue.Duration,
+                    Value = new ContextDiceValue
+                    {
+                        BonusValue = new ContextValue { ValueType = ContextValueType.Rank }
+                    }
                 };
-                contextCalculateSharedDuration.Value = newCalculateSharedValue;
+                components = components.ConcatSingle(newDurationValue);
+                hypnotism.Components = components.ToArray();
 
-                var newContextRunConfig = new ContextRankConfig
-                {
-                    m_BaseValueType = ContextRankBaseValueType.MaxCasterLevel,
-                    m_Progression = ContextRankProgression.AsIs
-                };
-                hypnotism.ComponentsArray = hypnotism.ComponentsArray
-                    .ConcatSingle(newContextRunConfig)
-                    .ToArray();
-
-
+                // Decrease ability range, remove conditions
                 var abilityTargetsAround = hypnotism.GetComponent<AbilityTargetsAround>();
-                abilityTargetsAround.m_Radius.m_Value = 15;
+                abilityTargetsAround.m_Radius.m_Value = 12;
                 abilityTargetsAround.m_Condition.Conditions = new Condition[] { };
 
+                // Change spell logic!
+                hypnotism.m_Overrides.Remove("$AbilityCalculateSharedValue$8a3f517b-295c-4d88-a31b-91641c420fa9");
                 var onRun = hypnotism.GetComponent<AbilityEffectRunAction>();
-                var firstConditionChecker = onRun.Actions.Actions.FirstOfType<Conditional>().ConditionsChecker;
-                firstConditionChecker.Conditions = firstConditionChecker.Conditions
-                    .Where(x => x.IsNotType<ContextConditionHitDice>())
+
+                // Remove hit dice initial condition
+                var initialCondChecker = onRun.Actions.Actions.FirstOfType<Conditional>().ConditionsChecker;
+                initialCondChecker.Conditions = initialCondChecker.Conditions
+                    .RemoveFirst(x => x is ContextConditionHitDice)
                     .ToArray();
 
-
+                // Different condition branches for undead and living
                 var afterBasicChecks = onRun.Actions.Actions.FirstOfType<Conditional>().IfFalse;
-                var undeadBranch = afterBasicChecks
+
+                var undeadAction = afterBasicChecks
+                    .Actions.FirstOfType<Conditional>().IfTrue
                     .Actions.FirstOfType<Conditional>().IfTrue;
 
-                var nonUndeadBranch = afterBasicChecks
+                var aliveAction = afterBasicChecks
                     .Actions.FirstOfType<Conditional>().IfFalse;
 
-                var undeadBuff = undeadBranch.Actions.FirstOfType<Conditional>()
-                    .IfTrue.Actions.FirstOfType<ContextActionSavingThrow>()
-                    .Actions.Actions.FirstOfType<ContextActionConditionalSaved>()
-                    .Failed.Actions.FirstOfType<ContextActionApplyBuff>();
-                undeadBuff.DurationValue = new ContextDurationValue
-                {
-                    m_IsExtendable = true,
-                    BonusValue = new ContextValue
-                    {
-                        ValueType = ContextValueType.Shared,
-                        ValueShared = AbilitySharedValue.Duration
-                    }
-                };
+                // Akcje zaczynając od tego miejsca:
+                // ContextActionSavingThrow/ContextActionConditionalSaved/ContextActionApplyBuff - change duration
+                // ContextActionChangeSharedValue - to remove
 
-
-                var nonUndeadBuff = nonUndeadBranch
-                    .Actions.FirstOfType<ContextActionSavingThrow>()
-                    .Actions.Actions.FirstOfType<ContextActionConditionalSaved>()
-                    .Failed.Actions.FirstOfType<ContextActionApplyBuff>();
-                nonUndeadBuff.DurationValue = new ContextDurationValue
+                foreach (var actionList in new[] { undeadAction, aliveAction })
                 {
-                    m_IsExtendable = true,
-                    BonusValue = new ContextValue
+                    actionList.Actions = actionList.Actions
+                        .RemoveFirst(x => x is ContextActionChangeSharedValue)
+                        .ToArray();
+
+                    var applyBuffAction = actionList.Actions.FirstOfType<ContextActionSavingThrow>()
+                        .Actions.Actions.FirstOfType<ContextActionConditionalSaved>()
+                        .Failed.Actions.FirstOfType<ContextActionApplyBuff>();
+                    applyBuffAction.DurationValue = new ContextDurationValue
                     {
-                        ValueType = ContextValueType.Shared,
-                        ValueShared = AbilitySharedValue.Duration
-                    }
-                };
+                        m_IsExtendable = true,
+                        BonusValue = new ContextValue
+                        {
+                            ValueType = ContextValueType.Shared,
+                            ValueShared = AbilitySharedValue.Duration
+                        }
+                    };
+                }
+
 
                 var hypnotismBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(hypnotismBuffGuid);
                 var saveEachRoundCondition = new BuffStatusCondition
@@ -112,7 +111,7 @@ namespace UnboundedArcana
                 };
 
                 hypnotismBuff.Components = hypnotismBuff.Components
-                    .Where(x => x.IsNotType<AddCondition>())
+                    .RemoveFirst(x => x is AddCondition)
                     .ConcatSingle(saveEachRoundCondition)
                     .ToArray();
 
