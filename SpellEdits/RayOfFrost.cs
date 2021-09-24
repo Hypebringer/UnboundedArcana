@@ -33,9 +33,10 @@ namespace UnboundedArcana
                     m_BaseValueType = ContextRankBaseValueType.CasterLevel,
                     m_Type = AbilityRankType.DamageBonus,
                     m_Progression = ContextRankProgression.Div2,
-                    m_Max = 20
+                    m_Max = 10
                 };
                 rayOfFrost.AddComponent(contextRankConfig);
+
                 var runAction = rayOfFrost.GetComponent<AbilityEffectRunAction>();
                 var dealDamageAction = runAction.Actions.Actions.FirstOfType<ContextActionDealDamage>();
                 dealDamageAction.Value.BonusValue = new ContextValue

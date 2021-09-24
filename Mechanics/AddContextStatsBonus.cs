@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Kingmaker.EntitySystem.Stats;
 using Kingmaker.Enums;
 using Kingmaker.UnitLogic;
+using Kingmaker.UnitLogic.FactLogic;
 using Kingmaker.UnitLogic.Mechanics;
 
 namespace UnboundedArcana.Mechanics
@@ -16,7 +17,6 @@ namespace UnboundedArcana.Mechanics
     /// </summary>
     public class AddContextStatsBonus : UnitFactComponentDelegate
     {
-
         public ModifierDescriptor Descriptor;
 
         public StatType[] Stats;
@@ -31,18 +31,21 @@ namespace UnboundedArcana.Mechanics
 
         public override void OnTurnOn()
         {
+#if DEBUG
+            Main.Logger.Log($"Entering OnTurnOn.");
+#endif
             int num = CalculateBaseValue(base.Fact.MaybeContext);
-            foreach (var stat in Stats)
+            foreach (var statType in Stats)
             {
 
-                ModifiableValue stat_ = base.Owner.Stats.GetStat(stat);
+                ModifiableValue stat = base.Owner.Stats.GetStat(statType);
                 if (HasMinimal)
                 {
-                    stat_.AddModifier(Math.Max(num, Minimal), base.Runtime, Descriptor);
+                    stat.AddModifier(Math.Max(num, Minimal), base.Runtime, Descriptor);
                 }
                 else
                 {
-                    stat_.AddModifier(num, base.Runtime, Descriptor);
+                    stat.AddModifier(num, base.Runtime, Descriptor);
                 }
             }
         }
@@ -55,13 +58,19 @@ namespace UnboundedArcana.Mechanics
 
         public int CalculateBaseValue(MechanicsContext context)
         {
+#if DEBUG
+            Main.Logger.Log($"Entering CalculateBaseValue.");
+#endif
             if (context == null)
             {
                 Main.Logger.Error("Context is missing");
                 return 0;
             }
-
-            return Value.Calculate(context) * Multiplier;
+            var calculated = Value.Calculate(context);
+#if DEBUG
+            Main.Logger.Log($"Inside CalculateBaseValue. Value is {calculated}. Multiplier is {Multiplier}. Caster level is {context.Params?.CasterLevel}");
+#endif
+            return calculated * Multiplier;
         }
     }
 }

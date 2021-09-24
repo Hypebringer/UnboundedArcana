@@ -22,6 +22,7 @@ using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
 using UnboundedArcana.Mechanics;
+using UnboundedArcana.Utilities.Builders;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
@@ -37,20 +38,18 @@ namespace UnboundedArcana
             try
             {
                 var guidance = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(guidanceGuid);
-                guidance.m_Description = CreateLocalizedString(" This spell imbues the subject with a touch of divine guidance. The creature gets a + 1 competence bonus on a single attack roll, saving throw, or skill check. This bonus increases to +2 at 8th level and +3 at 16th level");
+                guidance.m_Description = CreateLocalizedString("This spell imbues the subject with a touch of divine guidance. The creature gets a +1 competence bonus on a single attack roll, saving throw, or skill check. This bonus increases to +2 at 8th level and +3 at 16th level");
 
                 var guidanceBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(guidanceBuffGuid);
-                guidanceBuff.m_Description = CreateLocalizedString(" This spell imbues the subject with a touch of divine guidance. The creature gets a + 1 competence bonus on a single attack roll, saving throw, or skill check. This bonus increases to +2 at 8th level and +3 at 16th level");
+                guidanceBuff.m_Description = CreateLocalizedString("This spell imbues the subject with a touch of divine guidance. The creature gets a +1 competence bonus on a single attack roll, saving throw, or skill check. This bonus increases to +2 at 8th level and +3 at 16th level");
 
-                var contextRankConfig = new ContextRankConfig
+                var contextRankConfig = new ContextRankConfigBuilder
                 {
-                    m_Type = AbilityRankType.Default,
-                    m_BaseValueType = ContextRankBaseValueType.CasterLevel,
-                    m_Max = 3,
-                    m_UseMax = true,
-                    m_StepLevel = 8,
-                    m_Progression = ContextRankProgression.OnePlusDivStep
-                };
+                    BaseValueType = ContextRankBaseValueType.CasterLevel,
+                    Type = AbilityRankType.Default,
+                    StepLevel = 8,
+                    Progression = ContextRankProgression.OnePlusDivStep
+                }.Build();
                 guidanceBuff.AddComponent(contextRankConfig);
 
                 guidanceBuff.RemoveComponents(x => x is BuffAllSavesBonus || x is AddStatBonus || x is BuffAllSkillsBonus);
