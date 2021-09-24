@@ -67,5 +67,21 @@ namespace UnboundedArcana.Extensions
                     yield return item;
             }
         }
+
+        public static IEnumerable<T> RemoveAll<T>(this IEnumerable<T> source, Func<T, bool> which)
+        {
+            foreach (var item in source)
+            {
+                if (which(item)) { }
+                else
+                    yield return item;
+            }
+        }
+
+        public static IEnumerable<T> Tap<T>(this IEnumerable<T> source, Action<IEnumerable<T>> action)
+        {
+            action(source);
+            return source;
+        }
     }
 }

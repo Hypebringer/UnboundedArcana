@@ -35,6 +35,16 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release 2 - Electric Boogaloo|AnyCPU'">
+    <OutputPath>bin\Release 2 - Electric Boogaloo\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Pathfinder Second Adventure\Wrath_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
@@ -87,9 +97,11 @@
     <Compile Include="Extensions\BlueprintScriptableObjectExtensions.cs" />
     <Compile Include="Extensions\MoreEnumerable.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Mechanics\Foo.cs" />
     <Compile Include="Patches\UnchainSpellsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpellEdits\Daze.cs" />
+    <Compile Include="SpellEdits\Guidance.cs" />
     <Compile Include="SpellEdits\Jolt.cs" />
     <Compile Include="SpellEdits\CauseFear.cs" />
     <Compile Include="SpellEdits\DeepSlumber.cs" />
