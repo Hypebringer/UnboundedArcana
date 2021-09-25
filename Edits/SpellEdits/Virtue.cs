@@ -40,7 +40,7 @@ namespace UnboundedArcana.Edits
                 {
                     BaseValueType = ContextRankBaseValueType.CasterLevel,
                     Type = AbilityRankType.Default,
-                    Progression = ContextRankProgression.Div2,
+                    Progression = ContextRankProgression.OnePlusDiv2,
                     Max = 10
                 }.Build();
                 virtueBuff.AddComponent(contextRankConfig);
