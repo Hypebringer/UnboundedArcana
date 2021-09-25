@@ -13,8 +13,6 @@ namespace UnboundedArcana.Patches
     {
         static bool initialized = false;
 
-        // TODO: fetch data from new patch, refactor Sleep and DeepSlumber, fix Hypnotism with this data, check stuff that I've already done if it can be cleaned.
-
         static void Postfix()
         {
             if (initialized) return;
@@ -28,8 +26,11 @@ namespace UnboundedArcana.Patches
             SpellEdits.EditRayOfFrost();
             SpellEdits.EditAcidSplash();
             SpellEdits.EditJolt();
+            SpellEdits.EditDivineZap();
             SpellEdits.EditDaze();
             SpellEdits.EditGuidance();
+            SpellEdits.EditVirtue();
+            SpellEdits.EditColorSpray();
         }
     }
 }
