@@ -21,3 +21,7 @@ Collection of my homebrew changes to Pathfinder: Wrath of The Righteous.
 - **Hypnotism** - Removed HD limits. Targets may attempt Will save on the end of their rounds to shake off effect. Area of effect decreased. Now lasts for 1 round / level.
 - **Rainbow Pattern** - Removed HD limit
 - **Trip**, **Greater Trip**, **Disarm**, **Greater Disarm**, **Dirty Trick**, **Greater Dirty Trick** - to qualify, you need to have Combat Expertise OR Piranha Strike (or Kinetic Warrior)
+
+
+## Credits
+This mod uses some helpers created by Vek for Tabletop Tweaks. I also wanted to express my gratitude to Vek for his help - it really helped me in creating this mod.
