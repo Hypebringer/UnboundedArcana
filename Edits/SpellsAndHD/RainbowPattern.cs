@@ -14,7 +14,7 @@ using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 namespace UnboundedArcana.Edits
 {
-    partial class SpellEdits
+    partial class SpellsAndHD
     {
         public static void EditRainbowPattern()
         {

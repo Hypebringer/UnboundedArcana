@@ -10,11 +10,11 @@ using UnboundedArcana.Extensions;
 using UnboundedArcana.Utilities;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
-namespace UnboundedArcana.Edits
+namespace UnboundedArcana.Edits.Feats
 {
-    static class PiranhaStrikeOrCombatExpertiseAsRequirement
+    static class Feats
     {
-        public static void Edit()
+        public static void EditCombatManeuverFeatsRequirements()
         {
             try
             {

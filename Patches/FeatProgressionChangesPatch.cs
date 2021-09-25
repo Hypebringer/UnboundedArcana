@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 using HarmonyLib;
 using Kingmaker.Blueprints.JsonSystem;
 using UnboundedArcana.Edits;
+using UnboundedArcana.Edits.Feats;
 
 namespace UnboundedArcana.Patches
 {
     [HarmonyPatch(typeof(BlueprintsCache), "Init")]
-    static class CombatManeuversPrerequisitePatch
+    static class FeatProgressionChangesPatch
     {
         static bool initialized = false;
 
         static void Postfix()
         {
+            if (!Main.Settings.InstallFeatProgressionChanges)
+            {
+                Main.Logger.Log("Skipping patch: Feat Progression Changes.");
+                initialized = true;
+            }
             if (initialized) return;
             initialized = true;
-            PiranhaStrikeOrCombatExpertiseAsRequirement.Edit();
+            Feats.EditCombatManeuverFeatsRequirements();
+            Main.Logger.Log("Installed patch: Feat Progression Changes!");
         }
     }
 }

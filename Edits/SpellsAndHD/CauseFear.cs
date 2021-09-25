@@ -13,7 +13,7 @@ using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 namespace UnboundedArcana.Edits
 {
-    static partial class SpellEdits
+    static partial class SpellsAndHD
     {
         public static void EditCauseFear()
         {

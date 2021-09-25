@@ -28,7 +28,7 @@ using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 namespace UnboundedArcana.Edits
 {
-    partial class SpellEdits
+    partial class Cantrips
     {
         public static void EditGuidance()
         {

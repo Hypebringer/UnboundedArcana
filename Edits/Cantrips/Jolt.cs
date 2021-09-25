@@ -19,16 +19,16 @@ using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 namespace UnboundedArcana.Edits
 {
-    partial class SpellEdits
+    partial class Cantrips
     {
-        public static void EditAcidSplash()
+        public static void EditJolt()
         {
-            const string acidSplashGuid = "0c852a2405dd9f14a8bbcfaf245ff823";
+            const string joltGuid = "16e23c7a8ae53cc42a93066d19766404";
 
             try
             {
-                var acidSplash = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(acidSplashGuid);
-                acidSplash.m_Description = CreateLocalizedString("You fire a small orb of acid at the target. You must succeed on a ranged touch attack to hit your target. The orb deals 1d3 + half of your caster level (max 10) points of acid damage.");
+                var jolt = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(joltGuid);
+                jolt.m_Description = CreateLocalizedString("You cause a spark of electricity to strike the target with a successful ranged touch attack. The spell deals 1d3 + half of your caster level (max 10) points of electricity damage.");
                 var contextRankConfig = new ContextRankConfigBuilder
                 {
                     BaseValueType = ContextRankBaseValueType.CasterLevel,
@@ -36,8 +36,8 @@ namespace UnboundedArcana.Edits
                     Progression = ContextRankProgression.Div2,
                     Max = 10
                 }.Build();
-                acidSplash.AddComponent(contextRankConfig);
-                var runAction = acidSplash.GetComponent<AbilityEffectRunAction>();
+                jolt.AddComponent(contextRankConfig);
+                var runAction = jolt.GetComponent<AbilityEffectRunAction>();
                 var dealDamageAction = runAction.Actions.Actions.FirstOfType<ContextActionDealDamage>();
                 dealDamageAction.Value.BonusValue = new ContextValue
                 {
@@ -45,11 +45,11 @@ namespace UnboundedArcana.Edits
                     ValueRank = AbilityRankType.DamageBonus
                 };
 
-                Main.Logger.Log($"Successfully installed Acid Splash edit!");
+                Main.Logger.Log($"Successfully installed Jolt edit!");
             }
             catch (Exception e)
             {
-                Main.Logger.Error($"Error when trying to edit Acid Splash spell! {e.Message}");
+                Main.Logger.Error($"Error when trying to edit Jolt spell! {e.Message}");
             }
         }
     }

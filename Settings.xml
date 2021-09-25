@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Settings>
+	<InstallCantripScaling>true</InstallCantripScaling>
+	<InstallSpellsWithoutHDLimits>true</InstallSpellsWithoutHDLimits>
+	<InstallFeatProgressionChanges>true</InstallFeatProgressionChanges>
+</Settings>

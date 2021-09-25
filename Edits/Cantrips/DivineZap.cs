@@ -19,16 +19,16 @@ using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 namespace UnboundedArcana.Edits
 {
-    partial class SpellEdits
+    partial class Cantrips
     {
-        public static void EditJolt()
+        public static void EditDivineZap()
         {
-            const string joltGuid = "16e23c7a8ae53cc42a93066d19766404";
+            const string divineZapGuid = "8a1992f59e06dd64ab9ba52337bf8cb5";
 
             try
             {
-                var jolt = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(joltGuid);
-                jolt.m_Description = CreateLocalizedString("You cause a spark of electricity to strike the target with a successful ranged touch attack. The spell deals 1d3 + half of your caster level (max 10) points of electricity damage.");
+                var divineZap = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(divineZapGuid);
+                divineZap.m_Description = CreateLocalizedString("You unleash your divine powers against a single target. The target takes 1d3 + half of your caster level (max 10) points of divine damage. A successful save halves the damage.");
                 var contextRankConfig = new ContextRankConfigBuilder
                 {
                     BaseValueType = ContextRankBaseValueType.CasterLevel,
@@ -36,8 +36,8 @@ namespace UnboundedArcana.Edits
                     Progression = ContextRankProgression.Div2,
                     Max = 10
                 }.Build();
-                jolt.AddComponent(contextRankConfig);
-                var runAction = jolt.GetComponent<AbilityEffectRunAction>();
+                divineZap.AddComponent(contextRankConfig);
+                var runAction = divineZap.GetComponent<AbilityEffectRunAction>();
                 var dealDamageAction = runAction.Actions.Actions.FirstOfType<ContextActionDealDamage>();
                 dealDamageAction.Value.BonusValue = new ContextValue
                 {
@@ -45,11 +45,11 @@ namespace UnboundedArcana.Edits
                     ValueRank = AbilityRankType.DamageBonus
                 };
 
-                Main.Logger.Log($"Successfully installed Jolt edit!");
+                Main.Logger.Log($"Successfully installed Divine Zap edit!");
             }
             catch (Exception e)
             {
-                Main.Logger.Error($"Error when trying to edit Jolt spell! {e.Message}");
+                Main.Logger.Error($"Error when trying to edit Divine Zap spell! {e.Message}");
             }
         }
     }
