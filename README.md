@@ -8,7 +8,7 @@ Collection of my homebrew changes to Pathfinder: Wrath of The Righteous.
 
 <br>
 
-**Detailed changes**
+## Detailed changes
 - **Acid Splash**, **Ray of Frost**, **Jolt**, **Divine Zap** - Damage increased to 1d3 + half of your caster level (max 10)
 - **Daze** - removed HD limit
 - **Cause Fear**, **Scare** - Removed HD limit
