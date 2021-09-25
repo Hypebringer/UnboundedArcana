@@ -30,7 +30,8 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -98,26 +99,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Edits\PiranhaStrikeOrCombatExpertiseAsRequirement.cs" />
     <Compile Include="Extensions\BlueprintScriptableObjectExtensions.cs" />
     <Compile Include="Extensions\MoreEnumerable.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Mechanics\AddContextStatsBonus.cs" />
+    <Compile Include="Patches\CombatManeuversPrerequisitePatch.cs" />
     <Compile Include="Patches\UnchainSpellsPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpellEdits\Daze.cs" />
-    <Compile Include="SpellEdits\ColorSpray.cs" />
-    <Compile Include="SpellEdits\Virtue.cs" />
-    <Compile Include="SpellEdits\Guidance.cs" />
-    <Compile Include="SpellEdits\DivineZap.cs" />
-    <Compile Include="SpellEdits\Jolt.cs" />
-    <Compile Include="SpellEdits\CauseFear.cs" />
-    <Compile Include="SpellEdits\DeepSlumber.cs" />
-    <Compile Include="SpellEdits\Hypnotism.cs" />
-    <Compile Include="SpellEdits\RainbowPattern.cs" />
-    <Compile Include="SpellEdits\AcidSplash.cs" />
-    <Compile Include="SpellEdits\RayOfFrost.cs" />
-    <Compile Include="SpellEdits\Sleep.cs" />
-    <Compile Include="SpellEdits\Scare.cs" />
+    <Compile Include="Edits\SpellEdits\Daze.cs" />
+    <Compile Include="Edits\SpellEdits\ColorSpray.cs" />
+    <Compile Include="Edits\SpellEdits\Virtue.cs" />
+    <Compile Include="Edits\SpellEdits\Guidance.cs" />
+    <Compile Include="Edits\SpellEdits\DivineZap.cs" />
+    <Compile Include="Edits\SpellEdits\Jolt.cs" />
+    <Compile Include="Edits\SpellEdits\CauseFear.cs" />
+    <Compile Include="Edits\SpellEdits\DeepSlumber.cs" />
+    <Compile Include="Edits\SpellEdits\Hypnotism.cs" />
+    <Compile Include="Edits\SpellEdits\RainbowPattern.cs" />
+    <Compile Include="Edits\SpellEdits\AcidSplash.cs" />
+    <Compile Include="Edits\SpellEdits\RayOfFrost.cs" />
+    <Compile Include="Edits\SpellEdits\Sleep.cs" />
+    <Compile Include="Edits\SpellEdits\Scare.cs" />
     <Compile Include="Utilities\Builders\ContextRankConfigBuilder.cs" />
     <Compile Include="Utilities\OwlcatUtilites.cs" />
     <Compile Include="Utilities\TagUtilities.cs" />

@@ -23,7 +23,7 @@ using UnboundedArcana.Extensions;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
-namespace UnboundedArcana
+namespace UnboundedArcana.Edits
 {
     partial class SpellEdits
     {

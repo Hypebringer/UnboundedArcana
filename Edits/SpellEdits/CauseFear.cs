@@ -11,7 +11,7 @@ using Kingmaker.UnitLogic.Abilities.Components;
 using UnboundedArcana.Extensions;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
-namespace UnboundedArcana
+namespace UnboundedArcana.Edits
 {
     static partial class SpellEdits
     {
