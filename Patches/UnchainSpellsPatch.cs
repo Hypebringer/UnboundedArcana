@@ -17,12 +17,6 @@ namespace UnboundedArcana.Patches
         {
             if (initialized) return;
             initialized = true;
-            SpellEdits.EditCauseFear();
-            SpellEdits.EditScare();
-            SpellEdits.EditSleep();
-            SpellEdits.EditDeepSlumber();
-            SpellEdits.EditRainbowPattern();
-            //SpellEdits.EditHypnotism();
             SpellEdits.EditRayOfFrost();
             SpellEdits.EditAcidSplash();
             SpellEdits.EditJolt();
@@ -30,6 +24,12 @@ namespace UnboundedArcana.Patches
             SpellEdits.EditDaze();
             SpellEdits.EditGuidance();
             SpellEdits.EditVirtue();
+            SpellEdits.EditCauseFear();
+            SpellEdits.EditScare();
+            SpellEdits.EditSleep();
+            SpellEdits.EditDeepSlumber();
+            SpellEdits.EditHypnotism();
+            SpellEdits.EditRainbowPattern();
             SpellEdits.EditColorSpray();
         }
     }

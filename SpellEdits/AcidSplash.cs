@@ -13,6 +13,7 @@ using Kingmaker.UnitLogic.Mechanics.Actions;
 using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
+using UnboundedArcana.Utilities.Builders;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
@@ -28,13 +29,13 @@ namespace UnboundedArcana
             {
                 var acidSplash = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(acidSplashGuid);
                 acidSplash.m_Description = CreateLocalizedString("You fire a small orb of acid at the target. You must succeed on a ranged touch attack to hit your target. The orb deals 1d3 + half of your caster level (max 10) points of acid damage.");
-                var contextRankConfig = new ContextRankConfig
+                var contextRankConfig = new ContextRankConfigBuilder
                 {
-                    m_BaseValueType = ContextRankBaseValueType.CasterLevel,
-                    m_Type = AbilityRankType.DamageBonus,
-                    m_Progression = ContextRankProgression.Div2,
-                    m_Max = 20
-                };
+                    BaseValueType = ContextRankBaseValueType.CasterLevel,
+                    Type = AbilityRankType.DamageBonus,
+                    Progression = ContextRankProgression.Div2,
+                    Max = 10
+                }.Build();
                 acidSplash.AddComponent(contextRankConfig);
                 var runAction = acidSplash.GetComponent<AbilityEffectRunAction>();
                 var dealDamageAction = runAction.Actions.Actions.FirstOfType<ContextActionDealDamage>();

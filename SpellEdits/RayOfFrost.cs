@@ -13,6 +13,7 @@ using Kingmaker.UnitLogic.Mechanics.Actions;
 using Kingmaker.UnitLogic.Mechanics.Components;
 using Kingmaker.UnitLogic.Mechanics.Conditions;
 using UnboundedArcana.Extensions;
+using UnboundedArcana.Utilities.Builders;
 using static UnboundedArcana.Utilities.OwlcatUtilites;
 
 
@@ -28,13 +29,13 @@ namespace UnboundedArcana
             {
                 var rayOfFrost = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(rayOfFrostGuid);
                 rayOfFrost.m_Description = CreateLocalizedString("A ray of freezing air and ice projects from your pointing finger. You must succeed on a ranged touch attack with the ray to deal damage to a target. The ray deals 1d3 + half of your caster level (max 10) points of cold damage.");
-                var contextRankConfig = new ContextRankConfig
+                var contextRankConfig = new ContextRankConfigBuilder
                 {
-                    m_BaseValueType = ContextRankBaseValueType.CasterLevel,
-                    m_Type = AbilityRankType.DamageBonus,
-                    m_Progression = ContextRankProgression.Div2,
-                    m_Max = 10
-                };
+                    BaseValueType = ContextRankBaseValueType.CasterLevel,
+                    Type = AbilityRankType.DamageBonus,
+                    Progression = ContextRankProgression.Div2,
+                    Max = 10
+                }.Build();
                 rayOfFrost.AddComponent(contextRankConfig);
 
                 var runAction = rayOfFrost.GetComponent<AbilityEffectRunAction>();

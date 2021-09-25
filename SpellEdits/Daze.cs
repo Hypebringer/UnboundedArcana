@@ -27,7 +27,6 @@ namespace UnboundedArcana
 
             try
             {
-                //AbilityTargetMaximumHitDice
                 var daze = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(dazeGuid);
                 daze.m_Description = CreateLocalizedString("This spell clouds the mind of a humanoid creature so that it takes no actions. A dazed subject is not stunned, so attackers get no special advantage against it. After a creature has been dazed by this spell, it is immune to the effects of this spell for 1 minute.");
                 daze.RemoveComponent(comp => comp is AbilityTargetMaximumHitDice);

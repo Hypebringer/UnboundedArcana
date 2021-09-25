@@ -34,11 +34,10 @@ namespace UnboundedArcana
             try
             {
                 var hypnotism = ResourcesLibrary.TryGetBlueprint<BlueprintAbility>(hypnotismGuid);
+                var hypnotismBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(hypnotismBuffGuid);
                 hypnotism.m_Description = CreateLocalizedString("Your gestures and droning incantation fascinate nearby living creatures, causing them to stop and stare blankly at you in a dazed condition. At the end of their turn, the subjects may attempt a new saving throw to end the effect.");
 
-                // Remove SharedValues
-                var components = hypnotism.Components
-                    .Where(comp => !(comp is ContextCalculateSharedValue));
+                hypnotism.RemoveComponents(x => x is ContextCalculateSharedValue);
 
                 // Add SharedValue for duration
                 var newDurationValue = new ContextCalculateSharedValue
@@ -46,11 +45,12 @@ namespace UnboundedArcana
                     ValueType = AbilitySharedValue.Duration,
                     Value = new ContextDiceValue
                     {
-                        BonusValue = new ContextValue { ValueType = ContextValueType.Rank }
+                        BonusValue = new ContextValue { ValueType = ContextValueType.Rank },
+                        DiceType = Kingmaker.RuleSystem.DiceType.Zero,
+                        DiceCountValue = 0
                     }
                 };
-                components = components.ConcatSingle(newDurationValue);
-                hypnotism.Components = components.ToArray();
+                hypnotism.AddComponent(newDurationValue);
 
                 // Decrease ability range, remove conditions
                 var abilityTargetsAround = hypnotism.GetComponent<AbilityTargetsAround>();
@@ -58,62 +58,46 @@ namespace UnboundedArcana
                 abilityTargetsAround.m_Condition.Conditions = new Condition[] { };
 
                 // Change spell logic!
-                hypnotism.m_Overrides.Remove("$AbilityCalculateSharedValue$8a3f517b-295c-4d88-a31b-91641c420fa9");
-                var onRun = hypnotism.GetComponent<AbilityEffectRunAction>();
-
-                // Remove hit dice initial condition
-                var initialCondChecker = onRun.Actions.Actions.FirstOfType<Conditional>().ConditionsChecker;
-                initialCondChecker.Conditions = initialCondChecker.Conditions
-                    .Remove(x => x is ContextConditionHitDice)
-                    .ToArray();
-
-                // Different condition branches for undead and living
-                var afterBasicChecks = onRun.Actions.Actions.FirstOfType<Conditional>().IfFalse;
-
-                var undeadAction = afterBasicChecks
-                    .Actions.FirstOfType<Conditional>().IfTrue
-                    .Actions.FirstOfType<Conditional>().IfTrue;
-
-                var aliveAction = afterBasicChecks
-                    .Actions.FirstOfType<Conditional>().IfFalse;
-
-                // Akcje zaczynając od tego miejsca:
-                // ContextActionSavingThrow/ContextActionConditionalSaved/ContextActionApplyBuff - change duration
-                // ContextActionChangeSharedValue - to remove
-
-                foreach (var actionList in new[] { undeadAction, aliveAction })
+                hypnotism.RemoveComponent(x => x is AbilityEffectRunAction);
+                var runAction = new AbilityEffectRunAction
                 {
-                    actionList.Actions = actionList.Actions
-                        .Remove(x => x is ContextActionChangeSharedValue)
-                        .ToArray();
-
-                    var applyBuffAction = actionList.Actions.FirstOfType<ContextActionSavingThrow>()
-                        .Actions.Actions.FirstOfType<ContextActionConditionalSaved>()
-                        .Failed.Actions.FirstOfType<ContextActionApplyBuff>();
-                    applyBuffAction.DurationValue = new ContextDurationValue
+                    SavingThrowType = SavingThrowType.Will,
+                    Actions = new ActionList
                     {
-                        m_IsExtendable = true,
-                        BonusValue = new ContextValue
-                        {
-                            ValueType = ContextValueType.Shared,
-                            ValueShared = AbilitySharedValue.Duration
-                        }
-                    };
-                }
+                        Actions = new[]
+                            {
+                            new ContextActionConditionalSaved
+                            {
+                                Succeed = CreateActionList(),
+                                Failed = CreateActionList(new ContextActionApplyBuff
+                                    {
+                                        m_Buff = hypnotismBuff.ToReference<BlueprintBuffReference>(),
+                                        DurationValue = new ContextDurationValue
+                                        {
+                                            Rate = DurationRate.Rounds,
+                                            BonusValue = new ContextValue
+                                            {
+                                                ValueType = ContextValueType.Shared,
+                                                ValueShared = AbilitySharedValue.Duration
+                                            },
+                                            DiceCountValue = 0
+                                        },
+                                        IsFromSpell = true
+                                    })
+                                }
+                            }
+                    }
+                };
+                hypnotism.AddComponent(runAction);
 
 
-                var hypnotismBuff = ResourcesLibrary.TryGetBlueprint<BlueprintBuff>(hypnotismBuffGuid);
+                
                 var saveEachRoundCondition = new BuffStatusCondition
                 {
                     SaveEachRound = true,
                     SaveType = SavingThrowType.Will,
                     Condition = UnitCondition.Dazed
                 };
-
-                hypnotismBuff.Components = hypnotismBuff.Components
-                    .Remove(x => x is AddCondition)
-                    .ConcatSingle(saveEachRoundCondition)
-                    .ToArray();
 
                 Main.Logger.Log($"Successfully installed Hypnotism edit!");
             }
