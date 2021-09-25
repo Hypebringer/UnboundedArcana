@@ -1,12 +1,12 @@
 ﻿{
   "AssemblyName": "UnboundedArcana.dll",
   "Author": "Hypebringer",
-  "DisplayName": "Unbounded Arcana",
+  "DisplayName": "Unbounded Arcana - Personal Homebrew Tweaks",
   "EntryMethod": "UnboundedArcana.Main.Load",
   "GameVersion": "1.0",
   "HomePage": "https://github.com/Aegonek/UnboundedArcana",
   "Id": "UnboundedArcana",
   "ManagerVersion": "0.23.0",
   "Requirements": [],
-  "Version": "0.1.0"
+  "Version": "1.0.0"
 }

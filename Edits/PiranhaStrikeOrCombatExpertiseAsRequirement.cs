@@ -53,8 +53,6 @@ namespace UnboundedArcana.Edits
                         m_Features = references,
                         Amount = 1
                     };
-                    foreach (var futr in blueprint.GetComponents<PrerequisiteFeature>())
-                        Main.Logger.Log($"My name is {futr.m_Feature.Guid.ToString()}");
 
                     blueprint.RemoveComponents(x => x is PrerequisiteFeature ftr 
                         && !featuresGuids.Contains(ftr.m_Feature.Guid.ToString()));

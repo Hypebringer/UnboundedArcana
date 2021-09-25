@@ -35,7 +35,7 @@ namespace UnboundedArcana.Edits
                 {
                     var hitDiceLimit = variant.GetComponent<ContextCalculateSharedValue>();
                     hitDiceLimit.Value.BonusValue = new ContextValue { ValueType = ContextValueType.Rank };
-                    variant.m_Description = CreateLocalizedString("A variant spell causes a magical slumber to come upon 4 + 1/2 of caster level (max 5) HD of creatures, and those who are closest to the spell's point of origin are affected first. HD that are not sufficient to affect a creature are wasted. varianting creatures are helpless. Wounding awakens an affected creature, but normal noise does not. variant does not target unconscious creatures, constructs, or undead creatures.");
+                    variant.m_Description = CreateLocalizedString("A variant spell causes a magical slumber to come upon 4 + 1/2 of caster level (max 5) HD of creatures, and those who are closest to the spell's point of origin are affected first. HD that are not sufficient to affect a creature are wasted. Sleeping creatures are helpless. Wounding awakens an affected creature, but normal noise does not. Sleep does not target unconscious creatures, constructs, or undead creatures.");
                     variant.RemoveComponent(x => x is ContextRankConfig);
                     var contextRankConfig = new ContextRankConfigBuilder
                     {
