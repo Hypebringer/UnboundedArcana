@@ -2,6 +2,9 @@
 
 Collection of my homebrew changes to Pathfinder: Wrath of The Righteous.
 
+# Notification
+As of 20 June 2022, this mod is abandoned. It works on version 1.2 of the game and I don't intend to update it for future versions. However, most of the features of this mods will be included and overhauled in my upcoming mods - *Tactical Warfare* and *With Enchanting Smile*. I expect to release them somewhen in July / August.
+
 ## Changes overview
 1. Added cantrips scaling. Cantrips' scaling is balanced about idea that using class / archetype powers should be more powerful than cantrips. Still, they are a little more useful.
 2. Removed "this spell has no effect on targets above N HD" mechanic, rebalancing the spells with that in mind. The only spells that retain HD limit are Sleep and Deep Slumber spell - I thought their instakill potential is too big to allow it. They were however granted significant scaling. You won't be able to instakill demon lords, but they may prove effective even against minibosses.
